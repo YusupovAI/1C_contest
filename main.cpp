@@ -55,8 +55,15 @@ int main(int argc, char* argv[]) {
         sym = window.GetCharacter();
         if (sym != '\t') {
           window.PutCharacter('\n');
+          current.push_back(sym);
+          position = trie.GoTo(position, sym);
+          window.PutString(current);
+        } else {
+          for (auto sym:result) {
+            position = trie.GoTo(position, sym);
+          }
+          current += result;
         }
-        current += result;
         continue;
       }
       if (sym == '\n') {
