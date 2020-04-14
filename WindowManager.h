@@ -2,6 +2,7 @@
 
 #include <curses.h>
 #include <string>
+#include <vector>
 
 class WindowManager {
  public:
@@ -19,6 +20,15 @@ class WindowManager {
 
   ~WindowManager();
 
+  void RemoveLast(size_t cnt = 1);
+
+  void StepBack(int& y, int& x);
+
  private:
+  size_t width_{128};
+  size_t height_{30};
+
   WINDOW* main_window_;
+
+  std::vector<size_t> length_;
 };

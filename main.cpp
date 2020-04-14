@@ -53,11 +53,14 @@ int main(int argc, char* argv[]) {
         auto len = result.size();
         window.PutString(result);
         sym = window.GetCharacter();
+        if (sym == '\n') {
+          break;
+        }
         if (sym != '\t') {
-          window.PutCharacter('\n');
+          window.RemoveLast(len + 1);
           current.push_back(sym);
           position = trie.GoTo(position, sym);
-          window.PutString(current);
+          window.PutCharacter(sym);
         } else {
           for (auto sym:result) {
             position = trie.GoTo(position, sym);
